@@ -1,3 +1,11 @@
+/**
+ * Hill Cipher algorithm that encrypts plaintext "PAY" and given key
+ * and also decrypts cipher text.
+ *
+ * @author Srujan Gurram
+ * @version 1.0
+ * @license MIT
+ */
 
 public class PAY_HillCipher {
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
