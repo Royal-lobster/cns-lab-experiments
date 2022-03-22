@@ -4,11 +4,11 @@ This repository consist of all programs that I implemented for questions in lab 
 
 ### Syllabus
 
-- [ ] "Hello world" XOR each char with 0
-- [ ] "Hello world" XOR, AND, OR each char with 127
-- [ ] Hill Cipher with given key and message
+- [x] "Hello world" XOR each char with 0
+- [x] "Hello world" XOR, AND, OR each char with 127
+- [x] Hill Cipher with given key and message
 - [ ] Hill Cipher
-- [ ] Ceaser Cipher
+- [x] Ceaser Cipher
 - [ ] Substitution Cipher
 - [ ] Affine Cipher with given equation
 - [ ] Playfair Cipher with given key
