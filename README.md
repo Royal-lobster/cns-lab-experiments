@@ -10,7 +10,7 @@ This repository consist of all programs that I implemented for questions in lab 
 - [ ] Hill Cipher
 - [x] Ceaser Cipher
 - [ ] Substitution Cipher
-- [ ] Affine Cipher with given equation
+- [x] Affine Cipher with given equation
 - [ ] Playfair Cipher with given key
 - [ ] Polyalphabetic Cipher
 - [ ] Autokey Cipher
