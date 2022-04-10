@@ -106,23 +106,25 @@ public class PlayfairCipher {
             char a1;
             char b1;
 
-            // check if two digraphs are in same row in keyMatrix
-            if (a / 5 == b / 5) {
-                // get which row the digraphs are in
-                int r = a / 5;
+            // get row, col of a and b
+            int row_a = a / 5;
+            int col_a = a % 5;
+            int row_b = b / 5;
+            int col_b = b % 5;
 
+            // check if two digraphs are in same row in keyMatrix
+            if (row_a == row_b) {
                 // get wrapped +1 element in row of keyMatrix
                 if (!isToDecrypt) {
-                    a1 = keyMatrix.get((r * 5 + (a + 1) % 5));
-                    b1 = keyMatrix.get((r * 5 + (b + 1) % 5));
+                    a1 = keyMatrix.get((row_a * 5 + (a + 1) % 5));
+                    b1 = keyMatrix.get((row_a * 5 + (b + 1) % 5));
                 } else {
-                    a1 = keyMatrix.get((r * 5 + (a - 1) % 5));
-                    b1 = keyMatrix.get((r * 5 + (b - 1) % 5));
+                    a1 = keyMatrix.get((row_a * 5 + (a - 1) % 5));
+                    b1 = keyMatrix.get((row_a * 5 + (b - 1) % 5));
                 }
-
             }
             // check if two digraphs are in same column in keyMatrix
-            else if (a % 5 == b % 5) {
+            else if (col_a == col_b) {
                 // get wrapped +1 element in column of keyMatrix
                 if (!isToDecrypt) {
                     a1 = keyMatrix.get((a + 5) % 25);
@@ -135,6 +137,7 @@ public class PlayfairCipher {
                         a0 += 25;
                     if (b0 < 0)
                         b0 += 25;
+
                     // get element in keyMatrix
                     a1 = keyMatrix.get(a0);
                     b1 = keyMatrix.get(b0);
@@ -142,12 +145,6 @@ public class PlayfairCipher {
             }
             // check if two digraphs are in same diagonal in keyMatrix
             else {
-                // get row, col of a
-                int row_a = a / 5;
-                int col_a = a % 5;
-                // get row, col of b
-                int row_b = b / 5;
-                int col_b = b % 5;
                 // get a1 and b1 from keyMatrix
                 a1 = keyMatrix.get((row_a * 5 + col_b));
                 b1 = keyMatrix.get((row_b * 5 + col_a));
