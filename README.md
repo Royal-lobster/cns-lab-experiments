@@ -13,7 +13,7 @@ This repository consist of all programs that I implemented for questions in lab 
 - [x] Affine Cipher with given equation
 - [x] Playfair Cipher with given key
 - [x] Polyalphabetic Cipher
-- [ ] Autokey Cipher
+- [x] Autokey Cipher
 - [ ] Rail fence technique
 - [ ] Simple Columner Transposition technique
 - [ ] Advanced Columner Transposition technique
