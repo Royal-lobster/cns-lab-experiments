@@ -11,7 +11,7 @@ This repository consist of all programs that I implemented for questions in lab 
 - [x] Ceaser Cipher
 - [ ] Substitution Cipher
 - [x] Affine Cipher with given equation
-- [ ] Playfair Cipher with given key
+- [x] Playfair Cipher with given key
 - [ ] Polyalphabetic Cipher
 - [ ] Autokey Cipher
 - [ ] Rail fence technique
