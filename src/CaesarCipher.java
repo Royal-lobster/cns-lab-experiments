@@ -11,10 +11,10 @@ import java.util.Scanner;
 
 public class CaesarCipher {
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    
-    public int findPos(char a){
-        for(int i = 0; i<alphabet.length(); i++)
-            if(alphabet.charAt(i) == a)
+
+    public int findPos(char a) {
+        for (int i = 0; i < alphabet.length(); i++)
+            if (alphabet.charAt(i) == a)
                 return i;
         return -1;
     }
@@ -29,32 +29,32 @@ public class CaesarCipher {
             // find the pos of current charecter
             int correctPos = findPos(m.charAt(i));
 
-            // find cipher pos of the charecter 
+            // find cipher pos of the charecter
             // (left shift for decrypt and right shift for encrypt)
             int cipherPos;
-            if(method == 0)
-                cipherPos =  (correctPos + k) % 26;
-            else{
-                cipherPos =  (correctPos - k) % 26;
+            if (method == 0)
+                cipherPos = (correctPos + k) % 26;
+            else {
+                cipherPos = (correctPos - k) % 26;
                 // if cipherPos is negative, add 26 to it
-                if(cipherPos < 0)
+                if (cipherPos < 0)
                     cipherPos += 26;
             }
 
             // append char of alphabet at cipherPos
             char cipherChar;
-            if(correctPos == -1)
+            if (correctPos == -1)
                 cipherChar = m.charAt(i);
-             else
+            else
                 cipherChar = alphabet.charAt(cipherPos);
-            
+
             output.append(cipherChar);
-            
+
         }
         return output.toString();
     }
-    
-    public String encrypt(String p, int k){
+
+    public String encrypt(String p, int k) {
         return crypt(p, k, 0);
     }
 
@@ -63,7 +63,7 @@ public class CaesarCipher {
     }
 
     public static void main(String[] args) {
-        
+
         // Initalize this object
         CaesarCipher obj = new CaesarCipher();
 
