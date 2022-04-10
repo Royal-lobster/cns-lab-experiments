@@ -93,17 +93,9 @@ public class PlayfairCipher {
 
         // convert string p to digraphs
         List<String> digraphs = digraphs(m);
-        System.out.println("digraphs: " + digraphs);
 
         // get the key matrix
         List<Character> keyMatrix = getKeyMatrix(k);
-        System.out.println("keyMatrix: ");
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                System.out.print(keyMatrix.get(i * 5 + j) + " ");
-            }
-            System.out.println();
-        }
 
         // compare each digraph with keyMatrix and build cipher text
         StringBuilder output = new StringBuilder();
@@ -113,11 +105,9 @@ public class PlayfairCipher {
             int b = keyMatrix.indexOf(digraph.charAt(1));
             char a1;
             char b1;
-            System.out.println("\ndigraph: " + digraph + " => a: " + a + " b: " + b);
 
             // check if two digraphs are in same row in keyMatrix
             if (a / 5 == b / 5) {
-                System.out.println("Row Same");
                 // get which row the digraphs are in
                 int r = a / 5;
 
@@ -133,7 +123,6 @@ public class PlayfairCipher {
             }
             // check if two digraphs are in same column in keyMatrix
             else if (a % 5 == b % 5) {
-                System.out.println("Column same");
                 // get wrapped +1 element in column of keyMatrix
                 if (!isToDecrypt) {
                     a1 = keyMatrix.get((a + 5) % 25);
@@ -153,7 +142,6 @@ public class PlayfairCipher {
             }
             // check if two digraphs are in same diagonal in keyMatrix
             else {
-                System.out.println("Diagonal same");
                 // get row, col of a
                 int row_a = a / 5;
                 int col_a = a % 5;
@@ -167,7 +155,6 @@ public class PlayfairCipher {
 
             // append a1 and b1 to output
             output.append(Character.toString(a1) + Character.toString(b1));
-            System.out.println("a1: " + a1 + " b1: " + b1);
         }
         return output.toString();
     }
