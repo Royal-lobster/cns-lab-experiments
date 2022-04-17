@@ -15,7 +15,7 @@ This repository consist of all programs that I implemented for questions in lab 
 - [x] Polyalphabetic Cipher
 - [x] Autokey Cipher
 - [x] Rail fence technique
-- [ ] Simple Columner Transposition technique
+- [x] Simple Columner Transposition technique
 - [ ] Advanced Columner Transposition technique
 - [ ] DES algorithm
 - [ ] Blowfish algorithm
