@@ -14,7 +14,7 @@ This repository consist of all programs that I implemented for questions in lab 
 - [x] Playfair Cipher with given key
 - [x] Polyalphabetic Cipher
 - [x] Autokey Cipher
-- [ ] Rail fence technique
+- [x] Rail fence technique
 - [ ] Simple Columner Transposition technique
 - [ ] Advanced Columner Transposition technique
 - [ ] DES algorithm
