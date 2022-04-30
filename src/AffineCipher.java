@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 
 public class AffineCipher {
+  
 
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
