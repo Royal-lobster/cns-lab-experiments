@@ -20,30 +20,34 @@ public class CaesarCipher {
         int a = 3;
 
         // Encrypt the plaintext
-        String c = obj.encrypt(p, a);
+        String c = obj.crypt(p, a, Mode.ENCRYPT);
         System.out.println("Encrypted text: " + c);
 
         // Decrypt the cipher text
-        p = obj.decrypt(c, a);
+        p = obj.crypt(c, a, Mode.DECRYPT);
         System.out.println("Decrypted text: " + p);
     }
 
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    private String crypt(String m, int k, int method) {
+    enum Mode {
+        ENCRYPT, DECRYPT
+    }
+
+    private String crypt(String m, int k, Mode mode) {
         StringBuilder output = new StringBuilder();
         m = m.toUpperCase();
 
         // loop over the plain text and add the cipher letter to sb
         for (int i = 0; i < m.length(); i++) {
 
-            // find the pos of current charecter
+            // find the pos of current character
             int correctPos = alphabet.indexOf(m.charAt(i));
 
-            // find cipher pos of the charecter
+            // find cipher pos of the character
             // (left shift for decrypt and right shift for encrypt)
             int cipherPos;
-            if (method == 0)
+            if (mode == Mode.ENCRYPT)
                 cipherPos = (correctPos + k) % 26;
             else {
                 cipherPos = (correctPos - k) % 26;
@@ -64,13 +68,4 @@ public class CaesarCipher {
         }
         return output.toString();
     }
-
-    public String encrypt(String p, int k) {
-        return crypt(p, k, 0);
-    }
-
-    public String decrypt(String c, int k) {
-        return crypt(c, k, 1);
-    }
-
 }

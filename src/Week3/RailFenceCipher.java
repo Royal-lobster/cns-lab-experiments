@@ -28,6 +28,45 @@ public class RailFenceCipher {
 
     }
 
+    enum RailType {
+        DEFAULT, STAR, APPEND_STRING
+    }
+
+    private void rail(String m, int k, char[][] arr, StringBuilder out, RailType method) {
+        boolean isDown = true;
+        int row = 0;
+        int col = 0;
+        int iterTimes = 0;
+        if (method == RailType.DEFAULT)
+            iterTimes = m.length();
+        else
+            iterTimes = m.length() / k;
+
+        for (int i = 0; i < iterTimes; i++) {
+            // determine direction of filling
+            if (row == 0)
+                isDown = true;
+            if (row == k - 1)
+                isDown = false;
+
+            // fill in the array or append to output string
+            if (method == RailType.STAR)
+                arr[row][col] = '*';
+            else if (method == RailType.APPEND_STRING)
+                out.append(arr[row][col]);
+            else
+                arr[row][col] = m.charAt(i);
+
+            // increment row and col
+            if (isDown)
+                row++;
+            else
+                row--;
+
+            col++;
+        }
+    }
+
     private String encrypt(String p, int k) {
         StringBuilder output = new StringBuilder();
 
@@ -68,43 +107,4 @@ public class RailFenceCipher {
         return output.toString();
     }
 
-    enum RailType {
-        DEFAULT, STAR, APPEND_STRING
-    }
-
-    private void rail(String m, int k, char[][] arr, StringBuilder out, RailType method) {
-        boolean isDown = true;
-        int row = 0;
-        int col = 0;
-        int iterTimes = 0;
-        if (method == RailType.DEFAULT)
-            iterTimes = m.length();
-        else
-            iterTimes = m.length() / k;
-
-        for (int i = 0; i < iterTimes; i++) {
-            // determine direction of filling
-            if (row == 0)
-                isDown = true;
-            if (row == k - 1)
-                isDown = false;
-
-            // fill in the array or append to output string
-            if (method == RailType.STAR)
-                arr[row][col] = '*';
-            else if (method == RailType.APPEND_STRING)
-                out.append(arr[row][col]);
-            else
-                arr[row][col] = m.charAt(i);
-
-            // increment row and col
-            if (isDown)
-                row++;
-            else
-                row--;
-
-            col++;
-        }
-
-    }
 }

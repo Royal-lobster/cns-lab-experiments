@@ -24,50 +24,28 @@ public class PlayfairCipher {
         String k = "roy";
 
         // Encrypt the plaintext
-        String c = obj.encrypt(p, k);
+        String c = obj.crypt(p, k, Mode.ENCRYPT);
         System.out.println("Encrypted text: " + c);
 
         // Decrypt the cipher text
-        p = obj.decrypt(c, k);
+        p = obj.crypt(c, k, Mode.DECRYPT);
         System.out.println("Decrypted text: " + p);
     }
 
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+    enum Mode {
+        ENCRYPT, DECRYPT
+    }
+
     public List<String> digraphs(String m) {
-        // convert string m to List of characters
-        List<Character> mList = new ArrayList<Character>();
-        for (int i = 0; i < m.length(); i++) {
-            mList.add(m.charAt(i));
-        }
-
-        // create a 2D array of characters
         List<String> digraphs = new ArrayList<String>();
+        for (int i = 0; i < m.length(); i += 2)
+            if (i + 1 < m.length() && m.charAt(i) != m.charAt(i + 1))
+                digraphs.add(Character.toString(m.charAt(i)) + Character.toString(m.charAt(i + 1)));
+            else
+                digraphs.add(Character.toString(m.charAt(i)) + Character.toString('X'));
 
-        // append each digraph to digraphs array
-        while (mList.size() != 1 && mList.size() != 0) {
-            char a = mList.get(0);
-            char b = mList.get(1);
-            if (a != b) {
-                // remove 0 and 1 indices from mList
-                mList.remove(0);
-                mList.remove(0);
-
-                // append digraph to digraphs array
-                digraphs.add(Character.toString(a) + Character.toString(b));
-            } else {
-                // remove 0 index from mList
-                mList.remove(0);
-
-                // append digraph to digraphs array
-                digraphs.add(Character.toString(a) + Character.toString('X'));
-            }
-        }
-
-        // if there is a last character, append it to digraphs array
-        if (mList.size() == 1) {
-            digraphs.add(Character.toString(mList.get(0)) + Character.toString('X'));
-        }
         return digraphs;
     }
 
@@ -76,30 +54,24 @@ public class PlayfairCipher {
         List<Character> keyMatrix = new ArrayList<Character>();
 
         // append each character of k to keyMatrix
-        for (int i = 0; i < k.length(); i++) {
+        for (int i = 0; i < k.length(); i++)
             // if character is not already in keyMatrix, append it
-            if (!keyMatrix.contains(k.charAt(i))) {
+            if (!keyMatrix.contains(k.charAt(i)))
                 keyMatrix.add(k.charAt(i));
-            }
-        }
 
         // if size of keyMatrix is less than 5, append rest of alphabet to it
-        if (keyMatrix.size() < 25) {
-            for (int i = 0; i < alphabet.length(); i++) {
+        if (keyMatrix.size() < 25)
+            for (int i = 0; i < alphabet.length(); i++)
                 if (!keyMatrix.contains(alphabet.charAt(i)) && alphabet.charAt(i) != 'J') {
                     keyMatrix.add(alphabet.charAt(i));
-                    // if size of keyMatrix is 5, break
-                    if (keyMatrix.size() == 25) {
+                    if (keyMatrix.size() == 25)
                         break;
-                    }
                 }
-            }
-        }
 
         return keyMatrix;
     }
 
-    public String crypt(String m, String k, Boolean isToDecrypt) {
+    public String crypt(String m, String k, Mode mode) {
         // convert p and k to upper case
         m = m.toUpperCase();
         k = k.toUpperCase();
@@ -120,15 +92,13 @@ public class PlayfairCipher {
             char b1;
 
             // get row, col of a and b
-            int row_a = a / 5;
-            int col_a = a % 5;
-            int row_b = b / 5;
-            int col_b = b % 5;
+            int row_a = a / 5, row_b = b / 5;
+            int col_a = a % 5, col_b = b % 5;
 
             // check if two digraphs are in same row in keyMatrix
             if (row_a == row_b) {
                 // get wrapped +1 element in row of keyMatrix
-                if (!isToDecrypt) {
+                if (mode == Mode.ENCRYPT) {
                     a1 = keyMatrix.get((row_a * 5 + (a + 1) % 5));
                     b1 = keyMatrix.get((row_a * 5 + (b + 1) % 5));
                 } else {
@@ -139,7 +109,7 @@ public class PlayfairCipher {
             // check if two digraphs are in same column in keyMatrix
             else if (col_a == col_b) {
                 // get wrapped +1 element in column of keyMatrix
-                if (!isToDecrypt) {
+                if (mode == Mode.ENCRYPT) {
                     a1 = keyMatrix.get((a + 5) % 25);
                     b1 = keyMatrix.get((b + 5) % 25);
                 } else {
@@ -167,13 +137,5 @@ public class PlayfairCipher {
             output.append(Character.toString(a1) + Character.toString(b1));
         }
         return output.toString();
-    }
-
-    private String decrypt(String c, String k) {
-        return crypt(c, k, true);
-    }
-
-    private String encrypt(String p, String k) {
-        return crypt(p, k, false);
     }
 }

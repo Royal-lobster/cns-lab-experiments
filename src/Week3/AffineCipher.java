@@ -26,7 +26,6 @@ public class AffineCipher {
         // Decrypt the cipher text
         p = obj.decrypt(c, a, b);
         System.out.println("Decrypted text: " + p);
-
     }
 
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -35,13 +34,10 @@ public class AffineCipher {
         msg = msg.toUpperCase();
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < msg.length(); i++) {
-            if (msg.charAt(i) != ' ') {
-                int pos = alphabet.indexOf(msg.charAt(i));
-                int cipherPos = (a * pos + b) % 26;
-                char cipherChar = alphabet.charAt(cipherPos);
-                output.append(cipherChar);
-            } else
-                output.append(" ");
+            int pos = alphabet.indexOf(msg.charAt(i));
+            int cipherPos = (a * pos + b) % 26;
+            char cipherChar = alphabet.charAt(cipherPos);
+            output.append(cipherChar);
         }
         return output.toString();
     }
@@ -60,16 +56,13 @@ public class AffineCipher {
         // ---------------------------------
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < cipher.length(); i++) {
-            if (cipher.charAt(i) != ' ') {
-                int pos = alphabet.indexOf(cipher.charAt(i));
-                int cipherPos = (a_inv * (pos - b)) % 26;
-                // if cipherPos is negative, add 26 to it
-                if (cipherPos < 0)
-                    cipherPos += 26;
-                char cipherChar = alphabet.charAt(cipherPos);
-                output.append(cipherChar);
-            } else
-                output.append(" ");
+            int pos = alphabet.indexOf(cipher.charAt(i));
+            int cipherPos = (a_inv * (pos - b)) % 26;
+            // if cipherPos is negative, add 26 to it
+            if (cipherPos < 0)
+                cipherPos += 26;
+            char cipherChar = alphabet.charAt(cipherPos);
+            output.append(cipherChar);
         }
         return output.toString();
     }

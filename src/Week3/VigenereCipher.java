@@ -21,17 +21,21 @@ public class VigenereCipher {
         String k = "roy";
 
         // Encrypt the plaintext
-        String c = obj.encrypt(p, k);
+        String c = obj.crypt(p, k, Mode.ENCRYPT);
         System.out.println("Encrypted text: " + c);
 
         // Decrypt the cipher text
-        p = obj.decrypt(c, k);
+        p = obj.crypt(c, k, Mode.DECRYPT);
         System.out.println("Decrypted text: " + p);
     }
 
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    private String crypt(String m, String k, boolean isToDecrypt) {
+    enum Mode {
+        ENCRYPT, DECRYPT
+    }
+
+    private String crypt(String m, String k, Mode mode) {
         // Upper case the plain text and key
         m = m.toUpperCase();
         k = k.toUpperCase();
@@ -41,27 +45,15 @@ public class VigenereCipher {
         for (int i = 0; i < m.length(); i++) {
             int a = alphabet.indexOf(m.charAt(i));
             int b = alphabet.indexOf(k.charAt(i % k.length()));
-            if (a == -1 || b == -1) {
-                output.append(m.charAt(i));
-            } else {
-                if (!isToDecrypt)
-                    output.append(alphabet.charAt((a + b) % alphabet.length()));
-                else {
-                    int charPos = (a - b) % alphabet.length();
-                    if (charPos < 0)
-                        charPos += alphabet.length();
-                    output.append(alphabet.charAt(charPos));
-                }
+            if (mode == Mode.ENCRYPT)
+                output.append(alphabet.charAt((a + b) % alphabet.length()));
+            else {
+                int charPos = (a - b) % alphabet.length();
+                if (charPos < 0)
+                    charPos += alphabet.length();
+                output.append(alphabet.charAt(charPos));
             }
         }
         return output.toString();
-    }
-
-    private String encrypt(String p, String k) {
-        return crypt(p, k, false);
-    }
-
-    private String decrypt(String c, String k) {
-        return crypt(c, k, true);
     }
 }

@@ -36,7 +36,7 @@ public class AutokeyCipher {
         p = p.toUpperCase();
         k = k.toUpperCase();
 
-        // Repeat key if it is shorter than plain text
+        // append plain text to key if it is shorter than plain text
         String repeatedKey = k;
         while (repeatedKey.length() < p.length()) {
             for (int i = 0; i < p.length(); i++) {
@@ -51,12 +51,8 @@ public class AutokeyCipher {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < p.length(); i++) {
             int a = alphabet.indexOf(p.charAt(i));
-            int b = alphabet.indexOf(k.charAt(i));
-            if (a == -1 || b == -1)
-                output.append(p.charAt(i));
-            else
-                output.append(alphabet.charAt((a + b) % alphabet.length()));
-
+            int b = alphabet.indexOf(k.charAt(i % k.length()));
+            output.append(alphabet.charAt((a + b) % alphabet.length()));
         }
         return output.toString();
     }
@@ -70,28 +66,24 @@ public class AutokeyCipher {
         // Build the decrypted text letter by letter
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < c.length(); i++) {
-            int a;
-            int b;
+            int ci, ki;
             if (k.length() > 0) {
                 // use first letter of key and remove it from key
                 // as its used
-                a = alphabet.indexOf(c.charAt(i));
-                b = alphabet.indexOf(k.charAt(0));
+                ci = alphabet.indexOf(c.charAt(i));
+                ki = alphabet.indexOf(k.charAt(0));
                 k = k.substring(1);
             } else {
                 // if key exhausted, use the decoded plain text
                 // as key for further decryption
-                a = alphabet.indexOf(c.charAt(i));
-                b = alphabet.indexOf(output.charAt(i - k_len));
+                ci = alphabet.indexOf(c.charAt(i));
+                ki = alphabet.indexOf(output.charAt(i - k_len));
             }
-            if (a == -1 || b == -1)
-                output.append(c.charAt(i));
-            else {
-                int charPos = (a - b) % alphabet.length();
-                if (charPos < 0)
-                    charPos += alphabet.length();
-                output.append(alphabet.charAt(charPos));
-            }
+            int charPos = (ci - ki) % alphabet.length();
+            if (charPos < 0)
+                charPos += alphabet.length();
+            output.append(alphabet.charAt(charPos));
+
         }
         return output.toString();
     }
