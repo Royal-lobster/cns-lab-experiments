@@ -10,6 +10,5 @@ public class ExtendedEuclidean {
             return t1;
         else
             return egcd(b, a % b, t2, t1 - t2 * (a / b));
-
     }
 }
