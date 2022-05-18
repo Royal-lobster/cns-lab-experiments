@@ -1,3 +1,5 @@
+package Weak3;
+
 /**
  * Hill Cipher algorithm that encrypts plaintext "PAY" and given key
  * and also decrypts cipher text.

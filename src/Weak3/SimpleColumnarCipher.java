@@ -1,3 +1,5 @@
+package Weak3;
+
 import java.util.Scanner;
 
 /**

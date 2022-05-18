@@ -1,3 +1,5 @@
+package Weak3;
+
 import java.util.Scanner;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Scanner;
  */
 
 public class AffineCipher {
-  
+
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public int findPos(char a) {
