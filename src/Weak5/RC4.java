@@ -11,8 +11,8 @@ public class RC4 {
     private final int KEY_SIZE = 128;
 
     RC4() throws Exception {
-        rc4 = Cipher.getInstance("RC4");
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("RC4");
+        rc4 = Cipher.getInstance("ARCFOUR");
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("ARCFOUR");
         keyGenerator.init(KEY_SIZE);
         key = keyGenerator.generateKey();
     }
