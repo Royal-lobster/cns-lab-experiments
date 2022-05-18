@@ -3,17 +3,15 @@ package Weak5;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.GCMParameterSpec;
 import java.util.Base64;
 
 public class RC4 {
     private Cipher rc4;
     private SecretKey key;
     private final int KEY_SIZE = 128;
-    private final int DATA_LENGTH = 128;
 
     RC4() throws Exception {
-        rc4 = Cipher.getInstance("RC4");
+        rc4 = Cipher.getInstance("RC4/ECB/NoPadding");
         KeyGenerator keyGenerator = KeyGenerator.getInstance("RC4");
         keyGenerator.init(KEY_SIZE);
         key = keyGenerator.generateKey();
@@ -40,8 +38,7 @@ public class RC4 {
         byte[] cInBytes = Base64.getDecoder().decode(c);
 
         // Initialize decryption cipher (with Initialization Vector)
-        GCMParameterSpec spec = new GCMParameterSpec(DATA_LENGTH, rc4.getIV());
-        rc4.init(Cipher.DECRYPT_MODE, key, spec);
+        rc4.init(Cipher.DECRYPT_MODE, key);
 
         // Decrypt data
         byte[] decryptedBytes = rc4.doFinal(cInBytes);

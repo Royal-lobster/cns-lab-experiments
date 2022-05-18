@@ -1,18 +1,18 @@
-package Weak5;
+package Weak4;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.util.Base64;
 
-public class AES {
-    private Cipher aes;
+public class DES {
+    private Cipher des;
     private SecretKey key;
-    private final int KEY_SIZE = 128;
+    private final int KEY_SIZE = 56;
 
-    AES() throws Exception {
-        aes = Cipher.getInstance("AES");
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+    DES() throws Exception {
+        des = Cipher.getInstance("DES");
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("DES");
         keyGenerator.init(KEY_SIZE);
         key = keyGenerator.generateKey();
     }
@@ -22,9 +22,11 @@ public class AES {
         // Convert String to byte array
         byte[] pInBytes = p.getBytes();
 
+        // Initialize encryption cipher
+        des.init(Cipher.ENCRYPT_MODE, key);
+
         // Encrypt data
-        aes.init(Cipher.ENCRYPT_MODE, key);
-        byte[] encryptedBytes = aes.doFinal(pInBytes);
+        byte[] encryptedBytes = des.doFinal(pInBytes);
 
         // Convert encrypted bytes to base64 encoded string
         return Base64.getEncoder().encodeToString(encryptedBytes);
@@ -35,9 +37,11 @@ public class AES {
         // Decode base64 encoded cipher text
         byte[] cInBytes = Base64.getDecoder().decode(c);
 
+        // Initialize decryption cipher (with Initialization Vector)
+        des.init(Cipher.DECRYPT_MODE, key);
+
         // Decrypt data
-        aes.init(Cipher.DECRYPT_MODE, key);
-        byte[] decryptedBytes = aes.doFinal(cInBytes);
+        byte[] decryptedBytes = des.doFinal(cInBytes);
 
         // Convert decrypted bytes to string
         return new String(decryptedBytes);
@@ -45,7 +49,7 @@ public class AES {
 
     public static void main(String[] args) {
         try {
-            AES obj = new AES();
+            DES obj = new DES();
             String c = obj.encrypt("Hello This is Secret Message");
             String d = obj.decrypt(c);
 
