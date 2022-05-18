@@ -49,7 +49,7 @@ public class RC4 {
 
     public static void main(String[] args) {
         try {
-            AES obj = new AES();
+            RC4 obj = new RC4();
             String c = obj.encrypt("Hello This is Secret Message");
             String d = obj.decrypt(c);
 

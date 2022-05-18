@@ -49,7 +49,7 @@ public class Blowfish {
 
     public static void main(String[] args) {
         try {
-            DES obj = new DES();
+            Blowfish obj = new Blowfish();
             String c = obj.encrypt("Hello This is Secret Message");
             String d = obj.decrypt(c);
 
