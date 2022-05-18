@@ -9,21 +9,20 @@ This repository consist of all programs that I implemented for questions in lab 
 - [x] Hill Cipher with given key and message
 - [ ] Hill Cipher
 - [x] Ceaser Cipher
-- [ ] Substitution Cipher
 - [x] Affine Cipher with given equation
 - [x] Playfair Cipher with given key
 - [x] Polyalphabetic Cipher
 - [x] Autokey Cipher
 - [x] Rail fence technique
 - [x] Simple Columner Transposition technique
-- [ ] Advanced Columner Transposition technique
-- [ ] DES algorithm
-- [ ] Blowfish algorithm
-- [ ] Rijndael algorithm
-- [ ] RC4 logic in JAVA
-- [ ] Euclidean Algorithm
-- [ ] Advanced Euclidean Algorithm
-- [ ] Simple RSA Algorithm with small numbers
-- [ ] RSA Algorithm, Diffie-Hellman Key Exchange Mechanism using HTML and JS
-- [ ] Caluculate Message Digest of text using SHA-I in JAVA
-- [ ] Caluculate the Message Digest of text using MD5 in JAVA
+- [x] Advanced Columner Transposition technique
+- [x] DES algorithm
+- [x] Blowfish algorithm
+- [x] Rijndael algorithm
+- [x] RC4 logic in JAVA
+- [x] Euclidean Algorithm
+- [x] Advanced Euclidean Algorithm
+- [x] Simple RSA Algorithm with small numbers
+- [x] RSA Algorithm, Diffie-Hellman Key Exchange Mechanism using HTML and JS
+- [x] Caluculate Message Digest of text using SHA-I in JAVA
+- [x] Caluculate the Message Digest of text using MD5 in JAVA
