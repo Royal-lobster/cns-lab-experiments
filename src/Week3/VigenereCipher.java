@@ -1,4 +1,4 @@
-package Weak3;
+package Week3;
 
 /**
  * Vigenere Cipher algorithm that encrypts plaintext by given key

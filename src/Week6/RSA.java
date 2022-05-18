@@ -1,4 +1,4 @@
-package Weak6;
+package Week6;
 
 import java.math.*;
 

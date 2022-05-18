@@ -1,4 +1,4 @@
-package Weak7;
+package Week7;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

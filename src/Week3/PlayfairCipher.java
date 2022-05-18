@@ -1,4 +1,4 @@
-package Weak3;
+package Week3;
 
 import java.util.ArrayList;
 import java.util.List;

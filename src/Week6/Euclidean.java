@@ -1,4 +1,4 @@
-package Weak6;
+package Week6;
 
 public class Euclidean {
     public static void main(String[] args) {

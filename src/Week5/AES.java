@@ -1,4 +1,4 @@
-package Weak5;
+package Week5;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
