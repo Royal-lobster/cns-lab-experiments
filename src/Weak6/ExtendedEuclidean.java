@@ -6,10 +6,10 @@ public class ExtendedEuclidean {
     }
 
     private static int egcd(int a, int b, int t1, int t2) {
-        if (b == 0) {
+        if (b == 0)
             return t1;
-        } else {
+        else
             return egcd(b, a % b, t2, t1 - t2 * (a / b));
-        }
+
     }
 }
