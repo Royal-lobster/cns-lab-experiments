@@ -1,7 +1,5 @@
 package Weak3;
 
-import java.util.Scanner;
-
 /**
  * Caesar Cipher algorithm that encrypts plaintext by given key
  * and also decrypts cipher text.
@@ -12,14 +10,25 @@ import java.util.Scanner;
  */
 
 public class CaesarCipher {
-    public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public static void main(String[] args) {
 
-    public int findPos(char a) {
-        for (int i = 0; i < alphabet.length(); i++)
-            if (alphabet.charAt(i) == a)
-                return i;
-        return -1;
+        // Initalize this object
+        CaesarCipher obj = new CaesarCipher();
+
+        // Test variables
+        String p = "LOONATHEWORLD";
+        int a = 3;
+
+        // Encrypt the plaintext
+        String c = obj.encrypt(p, a);
+        System.out.println("Encrypted text: " + c);
+
+        // Decrypt the cipher text
+        p = obj.decrypt(c, a);
+        System.out.println("Decrypted text: " + p);
     }
+
+    public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     private String crypt(String m, int k, int method) {
         StringBuilder output = new StringBuilder();
@@ -29,7 +38,7 @@ public class CaesarCipher {
         for (int i = 0; i < m.length(); i++) {
 
             // find the pos of current charecter
-            int correctPos = findPos(m.charAt(i));
+            int correctPos = alphabet.indexOf(m.charAt(i));
 
             // find cipher pos of the charecter
             // (left shift for decrypt and right shift for encrypt)
@@ -64,47 +73,4 @@ public class CaesarCipher {
         return crypt(c, k, 1);
     }
 
-    public static void main(String[] args) {
-
-        // Initalize this object
-        CaesarCipher obj = new CaesarCipher();
-
-        // ------------------
-        // ENCRYPTION PHASE
-        // ------------------
-
-        // Ask user to enter plain text
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter plain text to encrypt: ");
-        String p = input.nextLine();
-
-        // Ask user to enter key
-        System.out.print("Enter key to encryption: ");
-        int k = input.nextInt();
-        input.nextLine();
-
-        // Encrypt the plain text with key and display the cipher text
-        String c = obj.encrypt(p, k);
-        System.out.println("Cipher text: " + c);
-
-        // ------------------
-        // DECRYPTION PHASE
-        // ------------------
-
-        // Ask user to enter cipher text
-        System.out.print("Enter cipher text to decrypt: ");
-        c = input.nextLine();
-
-        // Ask user to enter key
-        System.out.print("Enter key for decryption: ");
-        k = input.nextInt();
-        input.nextLine();
-
-        // Decrypt the cipher text with key and display the plain text
-        p = obj.decrypt(c, k);
-        System.out.println("Plain text " + p);
-
-        // Close input
-        input.close();
-    }
 }

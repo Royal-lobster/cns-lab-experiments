@@ -2,7 +2,6 @@ package Weak3;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Playfair Cipher algorithm that encrypts plaintext by given key
@@ -14,14 +13,26 @@ import java.util.Scanner;
  */
 
 public class PlayfairCipher {
-    public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    public int findPos(char a) {
-        for (int i = 0; i < alphabet.length(); i++)
-            if (alphabet.charAt(i) == a)
-                return i;
-        return -1;
+    public static void main(String[] args) {
+
+        // Initialize this object
+        PlayfairCipher obj = new PlayfairCipher();
+
+        // Test variables
+        String p = "LOONATHEWORLD";
+        String k = "roy";
+
+        // Encrypt the plaintext
+        String c = obj.encrypt(p, k);
+        System.out.println("Encrypted text: " + c);
+
+        // Decrypt the cipher text
+        p = obj.decrypt(c, k);
+        System.out.println("Decrypted text: " + p);
     }
+
+    public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public List<String> digraphs(String m) {
         // convert string m to List of characters
@@ -164,47 +175,5 @@ public class PlayfairCipher {
 
     private String encrypt(String p, String k) {
         return crypt(p, k, false);
-    }
-
-    public static void main(String[] args) {
-
-        // Initialize this object
-        PlayfairCipher obj = new PlayfairCipher();
-
-        // ------------------
-        // ENCRYPTION PHASE
-        // ------------------
-
-        // Ask user to enter plain text
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter plain text to encrypt: ");
-        String p = input.nextLine();
-
-        // Ask user to enter key
-        System.out.print("Enter key to encryption: ");
-        String k = input.nextLine();
-
-        // Encrypt the plain text with key and display the cipher text
-        String c = obj.encrypt(p, k);
-        System.out.println("Cipher text: " + c);
-
-        // ------------------
-        // DECRYPTION PHASE
-        // ------------------
-
-        // Ask user to enter cipher text
-        System.out.print("Enter cipher text to decrypt: ");
-        c = input.nextLine();
-
-        // Ask user to enter key
-        System.out.print("Enter key for decryption: ");
-        k = input.nextLine();
-
-        // Decrypt the cipher text with key and display the plain text
-        p = obj.decrypt(c, k);
-        System.out.println("Plain text " + p);
-
-        // Close input
-        input.close();
     }
 }

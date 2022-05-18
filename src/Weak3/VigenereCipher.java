@@ -1,7 +1,5 @@
 package Weak3;
 
-import java.util.Scanner;
-
 /**
  * Vigenere Cipher algorithm that encrypts plaintext by given key
  * and also decrypts cipher text.
@@ -18,73 +16,31 @@ public class VigenereCipher {
         // Initialize this object
         VigenereCipher obj = new VigenereCipher();
 
-        // ------------------
-        // ENCRYPTION PHASE
-        // ------------------
+        // Test variables
+        String p = "LOONATHEWORLD";
+        String k = "roy";
 
-        // Ask user to enter plain text
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter plain text to encrypt: ");
-        String p = input.nextLine();
-
-        // Ask user to enter key
-        System.out.print("Enter key to encryption: ");
-        String k = input.nextLine();
-
-        // Encrypt the plain text with key and display the cipher text
+        // Encrypt the plaintext
         String c = obj.encrypt(p, k);
-        System.out.println("Cipher text: " + c);
+        System.out.println("Encrypted text: " + c);
 
-        // ------------------
-        // DECRYPTION PHASE
-        // ------------------
-
-        // Ask user to enter cipher text
-        System.out.print("Enter cipher text to decrypt: ");
-        c = input.nextLine();
-
-        // Ask user to enter key
-        System.out.print("Enter key for decryption: ");
-        k = input.nextLine();
-
-        // Decrypt the cipher text with key and display the plain text
+        // Decrypt the cipher text
         p = obj.decrypt(c, k);
-        System.out.println("Plain text: " + p);
-
-        // Close input
-        input.close();
+        System.out.println("Decrypted text: " + p);
     }
 
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    public int findPos(char a) {
-        for (int i = 0; i < alphabet.length(); i++)
-            if (alphabet.charAt(i) == a)
-                return i;
-        return -1;
-    }
 
     private String crypt(String m, String k, boolean isToDecrypt) {
         // Upper case the plain text and key
         m = m.toUpperCase();
         k = k.toUpperCase();
 
-        // Repeat key if it is shorter than plain text
-        StringBuilder repeatedKey = new StringBuilder();
-        while (repeatedKey.length() < m.length()) {
-            for (int i = 0; i < k.length(); i++) {
-                if (repeatedKey.length() == m.length())
-                    break;
-                repeatedKey.append(k.charAt(i));
-            }
-        }
-        k = repeatedKey.toString();
-
         // build the output text
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < m.length(); i++) {
-            int a = findPos(m.charAt(i));
-            int b = findPos(k.charAt(i));
+            int a = alphabet.indexOf(m.charAt(i));
+            int b = alphabet.indexOf(k.charAt(i % k.length()));
             if (a == -1 || b == -1) {
                 output.append(m.charAt(i));
             } else {

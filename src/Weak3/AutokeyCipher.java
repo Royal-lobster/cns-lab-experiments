@@ -1,7 +1,5 @@
 package Weak3;
 
-import java.util.Scanner;
-
 /**
  * Autokey Cipher algorithm that encrypts plaintext by given key
  * and also decrypts cipher text.
@@ -18,51 +16,20 @@ public class AutokeyCipher {
         // Initialize this object
         AutokeyCipher obj = new AutokeyCipher();
 
-        // ------------------
-        // ENCRYPTION PHASE
-        // ------------------
+        // Test variables
+        String p = "LOONATHEWORLD";
+        String k = "roy";
 
-        // Ask user to enter plain text
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter plain text to encrypt: ");
-        String p = input.nextLine();
-
-        // Ask user to enter key
-        System.out.print("Enter key to encryption: ");
-        String k = input.nextLine();
-
-        // Encrypt the plain text with key and display the cipher text
+        // Encrypt the plaintext
         String c = obj.encrypt(p, k);
-        System.out.println("Cipher text: " + c);
+        System.out.println("Encrypted text: " + c);
 
-        // ------------------
-        // DECRYPTION PHASE
-        // ------------------
-
-        // Ask user to enter cipher text
-        System.out.print("Enter cipher text to decrypt: ");
-        c = input.nextLine();
-
-        // Ask user to enter key
-        System.out.print("Enter key for decryption: ");
-        k = input.nextLine();
-
-        // Decrypt the cipher text with key and display the plain text
+        // Decrypt the cipher text
         p = obj.decrypt(c, k);
-        System.out.println("Plain text: " + p);
-
-        // Close input
-        input.close();
+        System.out.println("Decrypted text: " + p);
     }
 
     public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    public int findPos(char a) {
-        for (int i = 0; i < alphabet.length(); i++)
-            if (alphabet.charAt(i) == a)
-                return i;
-        return -1;
-    }
 
     private String encrypt(String p, String k) {
         // Upper case the plain text and key
@@ -83,8 +50,8 @@ public class AutokeyCipher {
         // build the output text
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < p.length(); i++) {
-            int a = findPos(p.charAt(i));
-            int b = findPos(k.charAt(i));
+            int a = alphabet.indexOf(p.charAt(i));
+            int b = alphabet.indexOf(k.charAt(i));
             if (a == -1 || b == -1)
                 output.append(p.charAt(i));
             else
@@ -108,14 +75,14 @@ public class AutokeyCipher {
             if (k.length() > 0) {
                 // use first letter of key and remove it from key
                 // as its used
-                a = findPos(c.charAt(i));
-                b = findPos(k.charAt(0));
+                a = alphabet.indexOf(c.charAt(i));
+                b = alphabet.indexOf(k.charAt(0));
                 k = k.substring(1);
             } else {
                 // if key exhausted, use the decoded plain text
                 // as key for further decryption
-                a = findPos(c.charAt(i));
-                b = findPos(output.charAt(i - k_len));
+                a = alphabet.indexOf(c.charAt(i));
+                b = alphabet.indexOf(output.charAt(i - k_len));
             }
             if (a == -1 || b == -1)
                 output.append(c.charAt(i));

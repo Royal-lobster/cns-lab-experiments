@@ -46,7 +46,7 @@ public class AES {
     public static void main(String[] args) {
         try {
             AES obj = new AES();
-            String c = obj.encrypt("Hello This is Secret Message");
+            String c = obj.encrypt("LOONATHEWORLD");
             String d = obj.decrypt(c);
 
             System.out.println("Encrypted Data : " + c);

@@ -1,7 +1,5 @@
 package Weak3;
 
-import java.util.Scanner;
-
 /**
  * SimpleColumnar Cipher algorithm that encrypts plaintext by given key
  * and also decrypts cipher text.
@@ -16,53 +14,18 @@ public class SimpleColumnarCipher {
         // Initialize this object
         SimpleColumnarCipher obj = new SimpleColumnarCipher();
 
-        // ------------------
-        // ENCRYPTION PHASE
-        // ------------------
+        // Test variables
+        String p = "LOONATHEWORLD";
+        String k = "1432";
+        int row = 4, col = 4;
 
-        // Ask user to enter plain text
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter plain text to encrypt: ");
-        String p = input.nextLine();
-
-        // Ask user to enter rectangle dimension
-        System.out.print("Enter rectangle size separated by x: ");
-        String[] rect = input.nextLine().split("x");
-        int row = Integer.parseInt(rect[0]);
-        int col = Integer.parseInt(rect[1]);
-
-        // Ask user to enter key
-        System.out.print("Enter Key of length " + col + " for encryption: ");
-        String k = input.nextLine();
-
-        // Encrypt the plain text with key and display the cipher text
+        // Encrypt the plaintext
         String c = obj.encrypt(p, row, col, k);
-        System.out.println("Cipher text: " + c);
+        System.out.println("Encrypted text: " + c);
 
-        // ------------------
-        // DECRYPTION PHASE
-        // ------------------
-
-        // Ask user to enter cipher text
-        System.out.print("Enter cipher text to decrypt: ");
-        c = input.nextLine();
-
-        // Ask user to enter rectangle dimension
-        System.out.print("Enter rectangle size separated by x: ");
-        rect = input.nextLine().split("x");
-        row = Integer.parseInt(rect[0]);
-        col = Integer.parseInt(rect[1]);
-
-        // Ask user to enter key
-        System.out.print("Enter Key of length " + col + " for decryption: ");
-        k = input.nextLine();
-
-        // Decrypt the cipher text with key and display the plain text
+        // Decrypt the cipher text
         p = obj.decrypt(c, row, col, k);
-        System.out.println("Plain text: " + p);
-
-        // Close input
-        input.close();
+        System.out.println("Decrypted text: " + p);
     }
 
     private String encrypt(String p, int row, int col, String k) {

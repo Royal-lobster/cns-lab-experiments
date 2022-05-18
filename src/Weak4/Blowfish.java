@@ -50,7 +50,7 @@ public class Blowfish {
     public static void main(String[] args) {
         try {
             Blowfish obj = new Blowfish();
-            String c = obj.encrypt("Hello This is Secret Message");
+            String c = obj.encrypt("LOONATHEWORLD");
             String d = obj.decrypt(c);
 
             System.out.println("Encrypted Data : " + c);

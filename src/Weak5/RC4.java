@@ -50,7 +50,7 @@ public class RC4 {
     public static void main(String[] args) {
         try {
             RC4 obj = new RC4();
-            String c = obj.encrypt("Hello This is Secret Message");
+            String c = obj.encrypt("LOONATHEWORLD");
             String d = obj.decrypt(c);
 
             System.out.println("Encrypted Data : " + c);
