@@ -3,11 +3,11 @@ package Weak7;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
-public class SHA {
+public class MD5 {
     public static String hash(String msg) {
         try {
-            // Initialize the SHA-1 hash generator
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            // Initialize the MD5 hash generator
+            MessageDigest md = MessageDigest.getInstance("MD5");
 
             // Convert the message to bytes and digest it
             byte[] digest = md.digest(msg.getBytes());
@@ -26,6 +26,6 @@ public class SHA {
     }
 
     public static void main(String[] args) {
-        System.out.println("SHA HASH is : " + hash("Hello World"));
+        System.out.println("MD5 HASH is : " + hash("Hello World"));
     }
 }
