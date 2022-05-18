@@ -1,62 +1,63 @@
 package Week6;
 
-import java.math.*;
+import javax.crypto.Cipher;
+import java.security.KeyPairGenerator;
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.util.Base64;
 
 public class RSA {
+    private Cipher rsa;
+    PrivateKey privateKey;
+    PublicKey publicKey;
 
-    public static void main(String args[]) {
+    private final int KEY_SIZE = 512;
 
-        // ==============
-        // Key Generation
-        // ==============
-
-        // Initialize algorithm variables
-        int p = 3, q = 11, n = p * q;
-        int phi = (p - 1) * (q - 1);
-        int d = 0, e;
-
-        // Calculate exponent e (Part of Public key)
-        for (e = 2; e < phi; e++)
-            if (gcd(e, phi) == 1)
-                break;
-
-        // Calculate d (Part of Private key)
-        for (int i = 0; i <= 9; i++) {
-            int x = 1 + (i * phi);
-            if (x % e == 0) {
-                d = x / e;
-                break;
-            }
-        }
-
-        // Print Public and Private keys
-        System.out.println("Public key: [" + n + ", " + e + "]");
-        System.out.println("Private key: [" + n + ", " + d + "]");
-
-        // =======================
-        // Encryption / Decryption
-        // =======================
-
-        // Initialize message variables
-        int pMsg = 12;
-        double cMsg;
-        BigInteger dMsg;
-
-        cMsg = (Math.pow(pMsg, e)) % n;
-        System.out.println("Encrypted message is : " + cMsg);
-
-        // converting int/double values to BigInteger
-        BigInteger N = BigInteger.valueOf(n);
-        BigInteger C_MSG = BigDecimal.valueOf(cMsg).toBigInteger();
-
-        dMsg = (C_MSG.pow(d)).mod(N);
-        System.out.println("Decrypted message is : " + dMsg);
+    RSA() throws Exception {
+        rsa = Cipher.getInstance("RSA");
+        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+        keyPairGenerator.initialize(KEY_SIZE);
+        KeyPair key = keyPairGenerator.generateKeyPair();
+        privateKey = key.getPrivate();
+        publicKey = key.getPublic();
     }
 
-    static int gcd(int e, int z) {
-        if (e == 0)
-            return z;
-        else
-            return gcd(z % e, e);
+    public String encrypt(String p) throws Exception {
+
+        // Convert String to byte array
+        byte[] pInBytes = p.getBytes();
+
+        // Encrypt data
+        rsa.init(Cipher.ENCRYPT_MODE, publicKey);
+        byte[] encryptedBytes = rsa.doFinal(pInBytes);
+
+        // Convert encrypted bytes to base64 encoded string
+        return Base64.getEncoder().encodeToString(encryptedBytes);
+    }
+
+    public String decrypt(String c) throws Exception {
+
+        // Decode base64 encoded cipher text
+        byte[] cInBytes = Base64.getDecoder().decode(c);
+
+        // Decrypt data
+        rsa.init(Cipher.DECRYPT_MODE, privateKey);
+        byte[] decryptedBytes = rsa.doFinal(cInBytes);
+
+        // Convert decrypted bytes to string
+        return new String(decryptedBytes);
+    }
+
+    public static void main(String[] args) {
+        try {
+            RSA obj = new RSA();
+            String c = obj.encrypt("LOONATHEWORLD");
+            String d = obj.decrypt(c);
+
+            System.out.println("Encrypted Data : " + c);
+            System.out.println("Decrypted Data : " + d);
+        } catch (Exception ignored) {
+        }
     }
 }
