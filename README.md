@@ -23,6 +23,7 @@ This repository consist of all programs that I implemented for questions in lab 
 - [x] Euclidean Algorithm
 - [x] Advanced Euclidean Algorithm
 - [x] Simple RSA Algorithm with small numbers
-- [x] RSA Algorithm, Diffie-Hellman Key Exchange Mechanism using HTML and JS
+- [x] RSA Algorithm, 
+- [ ] Diffie-Hellman Key Exchange Mechanism using HTML and JS
 - [x] Caluculate Message Digest of text using SHA-I in JAVA
 - [x] Caluculate the Message Digest of text using MD5 in JAVA
