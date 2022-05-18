@@ -14,7 +14,7 @@ public class RC4 {
 
     RC4() throws Exception {
         rc4 = Cipher.getInstance("RC4");
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("RC4");
         keyGenerator.init(KEY_SIZE);
         key = keyGenerator.generateKey();
     }
